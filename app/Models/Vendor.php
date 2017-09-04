@@ -8,7 +8,7 @@ class Vendor extends Model
 {
     protected $fillable = ['fullname','address','phone','email','status'];
 
-    public function products(){
+    /*public function products(){
     	return $this->hasMany('App\Models\Product');
-    }
+    }*/
 }

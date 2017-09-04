@@ -20,6 +20,7 @@ Route::group(['namespace'=>'Inventory'],function(){
 	Route::resource('admin/vendor','VendorController');
 	Route::resource('admin/product-category','ProductCategoryController');
 	Route::resource('admin/unit','UnitController');
+	Route::resource('admin/product','ProductController');
 });
 // Route::get('/', function () {
 //     return view('welcome');
