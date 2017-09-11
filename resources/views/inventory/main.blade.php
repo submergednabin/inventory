@@ -95,7 +95,8 @@
 
     {{ Html::script('plugins/jQuery/jQuery-2.1.4.min.js') }}
 
-
+{{ Html::script('chart/highcharts.js') }}
+    {{ Html::script('chart/exporting.js') }}
 
 
 </head>
@@ -316,61 +317,67 @@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-book"></i>
-                            <span>Blog</span>
+                            <span>Product</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ url('admin/study-nepal/create') }}">Add New</a></li>
-                            <li><a href="{{ url('admin/study-nepal') }}">Study Nepal</a></li>
+                            <li><a href="{{ url('admin/product/create') }}">Add New</a></li>
+                            <li><a href="{{ url('admin/product') }}">All product</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
-                        <a href="{{ url('admin/contact') }}">
-                            <i class="fa fa-book"></i>
-                            <span>Contact</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        
-                    </li>
+                    
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-book"></i>
-                            <span>Mails</span>
+                            <span>Order</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
+                        <?php
+                            $order = \App\Models\Order::all();
+                            $count = count($order);
+                            $pendingOrder = \App\Models\Order::where('order_status',1)->get();
+                            $completedOrder = \App\Models\Order::where('order_status',2)->get();
+                            $cancelledOrder = \App\Models\Order::where('order_status',3)->get();
+                        ?>
                         <ul class="treeview-menu">
-                            <li><a href="{{ url('admin/mail-lists') }}">Inbox</a></li>
+                            <li><a href="{{ url('admin/order/create') }}">Add New</a></li>
+                            <li><a href="{{ url('admin/order') }}">All Orders 
+                            @if($count>0)
+                            <span class="count">
+                            {{$count}}
+                            </span>
+                            @endif
+                            </a></li>
+                            <li><a href="{{ url('admin/order/pending-order') }}">Pending Orders 
+                            @if(count($pendingOrder)>0)
+                            <span class="count">
+                            {{count($pendingOrder)}}
+                            </span>
+                            @endif
+                            </a></li>
+                            <li><a href="{{ url('admin/order/completed-order') }}">Completed Orders 
+                            @if(count($completedOrder)>0)
+                            <span class="count">
+                            {{count($completedOrder)}}
+                            </span>
+                            @endif
+                            </a></li>
+                            <li><a href="{{ url('admin/order/cancel-order') }}">Cancelled Orders 
+                            @if(count($cancelledOrder)>0)
+                            <span class="count">
+                            {{count($cancelledOrder)}}
+                            </span>
+                            @endif
+                            </a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-book"></i>
-                            <span>Abroad Study</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ url('admin/study-categories/create') }}">Add New Category</a></li>
-                            <li><a href="{{ url('admin/study-categories') }}">All Categories</a></li>
-                            <li><a href="{{ url('admin/abroad-studies/create') }}">Add New Abroad Study Content</a></li>
-                            <li><a href="{{ url('admin/abroad-studies') }}">All Abroad Study Content</a></li>
-                        </ul>
-                    </li>
-
                 @endif
-
-                   
             </ul>
             <!-- /.sidebar-menu -->
-
         </section>
-
         <!-- /.sidebar -->
-
     </aside>
-
-
     <!-- Content Wrapper. Contains page content -->
-
     <div class="content-wrapper">
 
 
@@ -447,15 +454,6 @@
 
 {{ Html::script('plugins/timepicker/bootstrap-timepicker.min.js') }}
 {{ Html::script('js/map.js') }}
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDahTFo6d3O6opOJ6rndcw9IplFimxkqw&callback=initMap&libraries=places">
-
-</script>
-
-
-
-        <!-- page script -->
-
 
 <script>
     $(function () {
@@ -492,6 +490,10 @@
 
         }
     });
+
+</script>
+
+
 
 </script>
 </body>

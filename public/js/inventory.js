@@ -244,6 +244,9 @@ jQuery( document ).ready( function( $ ) {
             request_data['price_array'] = $(this).find("input[name='price\\[\\]']").map(function(){
                 return $(this).val();
             }).get();
+            request_data['discount_price_array'] = $(this).find("input[name='discount_price\\[\\]']").map(function(){
+                return $(this).val();
+            }).get();
 
             if($('#in').is(":checked"))
             {
@@ -319,9 +322,7 @@ jQuery( document ).ready( function( $ ) {
                             window.location.href = data.url;
                         }else if(data.url == APP_URL+"/admin/order")
                         {
-                            $('html, body').animate({
-                                scrollTop: $(".scroll-edit-order-note").offset().top
-                            }, 200);
+                           
                             location.reload();
                         }else{
                             location.reload();

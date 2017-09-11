@@ -37,7 +37,9 @@ html,body{height:100%;font-family:'Montserrat-Regular', sans-serif;font-size:14p
     margin:0px !important;
 
 }
-
+.row.add-remove {
+    padding-top: 15px;
+}
 
 
 .sidebar {

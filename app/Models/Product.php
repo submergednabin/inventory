@@ -16,6 +16,14 @@ class Product extends Model
     	return $this->belongsTo('App\Models\Unit');
     }
 
+    public function productStocks(){
+        return $this->hasMany('App\Models\ProductStock');
+    }
+
+    public function orderItems(){
+        return $this->hasMany('App\Models\OrderItem');
+    }
+
     /*public function vendors(){
     	return $this->belongsTo('App\Models\Vendor');
     }*/
